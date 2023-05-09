@@ -150,7 +150,10 @@ class PaperclipApp:
     def update_labels(self):
         self.money_label.config(text=f'Money: ${self.money:.2f}')
         self.paperclip_label.config(text=f'Paperclips: {self.paperclips}')
-        self.wire_label.config(text=f'Wire: {self.wire}')
+        if self.wire_auto_buy_enabled:
+            self.wire_label.config(text=f'Auto-buy enabled! ({self.wire})')
+        else:
+            self.wire_label.config(text=f'Wire: {self.wire}')
         self.auto_builder_label.config(text=f'Auto Builders: {self.auto_builders}')
         self.sell_paperclip_button.config(text=f'Sell Paperclips (${self.paperclip_sell_price:.2f}/pc)')
         if self.wire_auto_buy_bought:
