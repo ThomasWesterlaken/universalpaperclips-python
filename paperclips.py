@@ -56,10 +56,16 @@ class PaperclipApp:
         self.master.after(1000, self.update_auto_builders)
 
     def make_paperclip(self):
-        if self.wire >= 1:
+        if self.wire_auto_buy_enabled and self.wire == 0 and self.money >= self.wire_cost:
+            self.money -= self.wire_cost
+            self.wire += 1
+            self.update_labels()
+        elif self.wire >= 1:
             self.paperclips += 1
             self.wire -= 1
             self.update_labels()
+        else:
+            return
 
     def buy_wire(self):
         try:
@@ -74,22 +80,15 @@ class PaperclipApp:
             self.update_labels()
 
     def buy_wire_auto_check(self):
-        if not  self.wire_auto_buy_bought:
+        if not self.wire_auto_buy_bought:
             self.buy_auto_wire_buy()
             return
-        if not self.wire_auto_buy_enabled:
-            self.wire_auto_buy_enabled = True;
-            self.run_auto_buy_wire()
-        else:
-            self.wire_auto_buy_enabled = False;
-        self.update_labels()
-            
-    def run_auto_buy_wire(self):
-        if self.wire_auto_buy_enabled:
-            if self.wire == 0:
-                self.buy_wire()
-            self.master.after(20, self.run_auto_buy_wire)
 
+        if self.wire_auto_buy_enabled:
+            self.wire_auto_buy_enabled = False
+        else:
+            self.wire_auto_buy_enabled = True
+        self.update_labels()
             
     def buy_auto_wire_buy(self):
         cost = 200
