@@ -68,13 +68,10 @@ class PaperclipApp:
         if self.wire_auto_buy_enabled and self.wire == 0 and self.money >= self.wire_cost:
             self.money -= self.wire_cost
             self.wire += 1
-            self.update_labels()
-        elif self.wire >= 1:
+        if self.wire >= 1:
             self.paperclips += 1
             self.wire -= 1
             self.update_labels()
-        else:
-            return
 
     def check_wire_input(self, new_value):
         if new_value == "":
