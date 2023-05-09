@@ -16,19 +16,23 @@ class PaperclipApp:
 
         self.master.title('Universal Paperclips')
 
-        self.money_label = tk.Label(self.master, text='Money: $100', font=('Arial', 16))
+        self.money_label = tk.Label(
+            self.master, text=f'Money: ${self.money:.2f}', font=('Arial', 16))
         self.money_label.pack(pady=10)
 
-        self.paperclip_label = tk.Label(self.master, text='Paperclips: 0', font=('Arial', 16))
+        self.paperclip_label = tk.Label(
+            self.master, text=f'Paperclips: {self.paperclips}', font=('Arial', 16))
         self.paperclip_label.pack(pady=10)
 
-        self.wire_label = tk.Label(self.master, text='Wire: 0', font=('Arial', 16))
+        self.wire_label = tk.Label(
+            self.master, text=f'Wire: {self.wire}', font=('Arial', 16))
         self.wire_label.pack(pady=10)
 
         self.make_paperclip_button = tk.Button(self.master, text='Make Paperclip', font=('Arial', 14), command=self.make_paperclip)
         self.make_paperclip_button.pack(pady=10)
 
-        self.buy_wire_label = tk.Label(self.master, text=f'Buy Wire (Cost: ${self.wire_cost}/unit)', font=('Arial', 14))
+        self.buy_wire_label = tk.Label(
+            self.master, text=f'Buy Wire (Cost: ${self.wire_cost}/unit)', font=('Arial', 14))
         self.buy_wire_label.pack()
 
         self.auto_buy_wire_button = tk.Button(self.master, text=f"Buy Wire Auto $200", font=('Arial', 14), command=self.buy_wire_auto_check)
@@ -50,7 +54,8 @@ class PaperclipApp:
         self.buy_auto_builder_button = tk.Button(self.master, text=f'Buy Auto Builder (Cost: {self.auto_builder_cost} paperclips)', font=('Arial', 14), command=self.buy_auto_builder)
         self.buy_auto_builder_button.pack(pady=10)
 
-        self.sell_paperclip_button = tk.Button(self.master, text=f'Sell Paperclips ($0.1/pc)', font=('Arial', 14), command=self.sell_paperclips)
+        self.sell_paperclip_button = tk.Button(
+            self.master, text=f'Sell Paperclips (${self.paperclip_sell_price:.2f}/pc)', font=('Arial', 14), command=self.sell_paperclips)
         self.sell_paperclip_button.pack(pady=10)
 
         self.upgrade_paperclip_sell_button = tk.Button(self.master, text=f'Upgrade Paperclip Sell Price (Cost: ${self.paperclip_sell_upgrade_cost})', font=('Arial', 14), command=self.upgrade_paperclip_sell)
