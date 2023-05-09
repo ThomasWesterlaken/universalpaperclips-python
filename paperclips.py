@@ -37,7 +37,11 @@ class PaperclipApp:
         self.wire_input = tk.Entry(self.master)
         self.wire_input.pack(pady=10)
 
-        self.buy_wire_button = tk.Button(self.master, text='Buy Wire', font=('Arial', 14), command=self.buy_wire)
+        vcmd = (self.master.register(self.check_wire_input), '%P')
+        self.wire_input.config(validate="key", validatecommand=vcmd)
+
+        self.buy_wire_button = tk.Button(
+            self.master, text='Buy Wire', font=('Arial', 14), command=self.buy_wire)
         self.buy_wire_button.pack(pady=10)
 
         self.auto_builder_label = tk.Label(self.master, text='Auto Builders: 0', font=('Arial', 16))
@@ -66,6 +70,16 @@ class PaperclipApp:
             self.update_labels()
         else:
             return
+
+    def check_wire_input(self, new_value):
+        if new_value == "":
+            return True
+
+        try:
+            int(new_value)
+            return True
+        except ValueError:
+            return False
 
     def buy_wire(self):
         try:
